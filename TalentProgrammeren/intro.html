@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Les 1: game development</title>
+        <style type="text/css">
+            .uitleg {
+                position: absolute;
+                display: inline-block;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div class="uitleg">
+          <h1>Les 1: game development</h1>
+            <ol>
+                <li>Werkomgeving aanmaken</li>
+                <li>Canvas element aanmaken</li>
+                <li>Rechthoek tekenen</li>
+                <li>Circel tekenen</li>
+                <li>Helperfuncties maken om niet steeds hetzelfde te schrijven</li>
+                <li>Heel belangrijk!!! Functie schrijven die steeds herhaald wordt. </li>
+                <li>Variabelen geven aan de cirkel en vierkant</li>
+                <li>Wat heb ik nodig om de vierkant steeds een plaats naar rechts te tekenen?</li>
+                <li></li>
+            </ol>
+        </div>
+        
+        
+       
+        <script>
+            const canvas = document.getElementById("gameCanvas");
+            const c = canvas.getContext('2d');
+
+            let circleX = 60;
+            let circleY = 350;
+            const circleRadius = 50;
+            let circleSpeedY = 5;
+
+            let rectX = 200;
+            let rectY = 200;
+            let rectW = 50;
+            let rectH = 50;
+            let rectSpeedX = 6;
+
+            let mario = new Image();
+            mario.src = "mario.png";
+
+// belangrijk!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            window.onload = function() {
+                let framesPerSecond = 30;
+
+                setInterval(updateAll, 1000/framesPerSecond);
+            }
+  
+        function updateAll() {
+            drawRect(0,0, canvas.width,canvas.height, "black");
+
+            drawText();
+            drawRect(rectX,rectY, rectW,rectH, "blue");
+            moveRect();
+
+            drawCircle(circleX,circleY, circleRadius, "green");
+            moveCircle();
+            
+            drawMario();
+            moveMario();
+        }
+
+        function drawText() {
+            c.beginPath();
+            c.strokeStyle = "white";
+            c.font = "60px serif";
+            c.strokeText("Les 1 Game dev", 130, 100)
+        }
+
+        function drawRect(rectX, rectY, rectW, rectH, rectColor) {
+            c.fillStyle = rectColor;
+            c.fillRect(rectX,rectY ,rectW, rectH, rectColor);
+        }
+
+        function drawCircle(circleX,circleY, circleRadius, circleColor) {
+            c.fillStyle = circleColor;
+            c.beginPath();
+            c.arc(circleX,circleY, circleRadius, 0,2*Math.PI, true);
+            c.fill();
+        }  
+
+        function moveRect() {
+            rectX += rectSpeedX;
+
+            if (rectX < 0 || rectX + rectW > canvas.width) {
+                rectSpeedX *= -1;
+            }
+        }
+
+        function moveCircle() {
+            circleY += circleSpeedY;
+
+            if(circleY - circleRadius < 0 || circleY + circleRadius > canvas.height) {
+                circleSpeedY = -circleSpeedY;
+            }
+        } 
+
+        function drawMario() {
+            c.drawImage(mario, canvas.width/2, 300);
+        }
+
+        function moveMario() {
+            
+        }
+
+        </script>
+    </body>
+</html>
