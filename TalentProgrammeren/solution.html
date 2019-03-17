@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Les 2: game development</title>
+    </head>
+    <body>
+
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <!-- Alle code hierboven is HTML, hier hoef je niet aan te komen. Dit dient enkel om een canvas te maken waarbinnen je je game kan tekenen, animeren,... -->
+
+
+    <script>
+            const canvas = document.getElementById("gameCanvas"); // Op deze lijn linken we ons html canvas element aan een constante in javascript
+            const c = canvas.getContext('2d'); // Op deze lijn maken we een constante c die de context bepaalt om te tekenen. (2d of 3d)
+
+    // Hieronder zie je een functie die automatisch start wanneer de pagina laadt. 
+            window.onload = function() {
+                let framesPerSecond = 30; // een variabele die het aantal beelden per seconde gaat bepalen in onderstaande functie
+
+                setInterval(updateAll, 1000/framesPerSecond); // Bestaande functie die 2 argumenten vraagt: updateAll is de naam van de een functie.
+                                                              // Het tweede argument staat voor het aantal beelden(frames) per seconde. 
+            }
+  
+    // Boven deze lijn hoef je normaal gezien niets aan te passen. Het enige wat je kan aanpassen is framesPerSecond. 
+    // De opdracht voor deze les: 
+            // de functie updateAll en de functie moveRect schrijven. 
+            // STAP 1: vul hier je de logica in die je probeert te doorlopen
+            // STAP 2: vul hier je de logica in die je probeert te doorlopen
+            // STAP 3: vul hier je de logica in die je probeert te doorlopen
+let rectX = 10;
+let speedRectX = 5;
+
+        function updateAll() {
+            // STAP 1: zwart scherm tekenen
+            c.fillStyle = 'black';
+            c.fillRect(0,0, 800,600);
+
+            // STAP 2: rode vierkant tekenen
+            c.fillStyle = 'red';
+            c.fillRect(rectX,10, 30,30);
+            
+            // STAP 5: moveRect oproepen ()
+            moveRect();
+        }
+
+
+        function moveRect() {
+            // STAP 3: x waarde van de rode vierkant steeds vermeerderen met de snelheidsfactor
+            rectX = rectX + speedRectX;
+
+            // STAP 4: logica om de snelheidsfactor van richting te laten veranderen (+ of -) wanneer deze de zijkanten van je canvas raakt
+            if(rectX < 0 || rectX + 30 > 800) {
+                speedRectX = speedRectX * -1;
+            }
+        }
+
+    </script>
+    </body>
+</html>
